@@ -1,7 +1,9 @@
 from __future__ import print_function
 from IPython.core.magics.execution import _format_time as fmt
 import os
+
 NOTIFICATION_MSG = u"terminal-notifier -appIcon https://www.python.org/static/apple-touch-icon-144x144-precomposed.png -sound Submarine -message '\u23F1 {}' -title 'Complete \u2714'"
+__version__ = '0.1'
 
 try:
     from time import perf_counter
