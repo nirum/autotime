@@ -26,12 +26,14 @@ class Timer(object):
         self.theta_print = thresholds[0]
         self.theta_display = thresholds[1]
 
-    def start(self):
+    def start(self, result):
         """Start the timer"""
+        del result  # Unused.
         self.start_time = perf_counter()
 
-    def stop(self):
+    def stop(self, result):
         """Stops the timer, and prints the elapsed time"""
+        del result  # Unused.
 
         if self.start_time:
             diff = perf_counter() - self.start_time

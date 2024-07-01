@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='autotime',
-    version='0.1',
+    version='0.2',
 
     description='IPython extension for timing commands',
     url='https://github.com/nirum/autotime',
