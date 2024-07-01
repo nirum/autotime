@@ -2,7 +2,7 @@ from __future__ import print_function
 from IPython.core.magics.execution import _format_time as fmt
 import os
 
-NOTIFICATION_MSG = u"terminal-notifier -appIcon https://www.python.org/static/apple-touch-icon-144x144-precomposed.png -sound Submarine -message '\u23F1 {}' -title 'Complete \u2714'"
+NOTIFICATION_MSG = u"terminal-notifier -appIcon https://www.python.org/static/apple-touch-icon-144x144-precomposed.png -sound Submarine -message '\u23F1 {}' -title '{} \u2714'"
 __version__ = '0.1'
 
 try:
@@ -33,7 +33,6 @@ class Timer(object):
 
     def stop(self, result):
         """Stops the timer, and prints the elapsed time"""
-        del result  # Unused.
 
         if self.start_time:
             diff = perf_counter() - self.start_time
@@ -42,9 +41,10 @@ class Timer(object):
             if diff > self.theta_print:
                 print(u'\u23F1  {}'.format(fmt(diff)))
 
-            # currently broken, terminal-notifier is hanging for some reasno
+            # Use terminal-notifier to provide a desktop notification.
             if diff > self.theta_display and os.uname().sysname == 'Darwin':
-                os.system(NOTIFICATION_MSG.format(fmt(diff)))
+                msg = NOTIFICATION_MSG.format(fmt(diff), result.info.raw_cell)
+                os.system(msg)
 
 
 def load_ipython_extension(ip):
